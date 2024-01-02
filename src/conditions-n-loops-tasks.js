@@ -21,8 +21,12 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  let isStatus = false;
+  if (number >= 0) {
+    isStatus = true;
+  }
+  return isStatus;
 }
 
 /**
@@ -38,8 +42,14 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  let max = c;
+  if (a >= b && a >= c) {
+    max = a;
+  } else if (b >= a && b >= c) {
+    max = b;
+  }
+  return max;
 }
 
 /**
@@ -60,8 +70,14 @@ function getMaxNumber(/* a, b, c */) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  let isStatus = false;
+  const x = (queen.x - king.x) ** 2;
+  const y = (queen.y - king.y) ** 2;
+  if (x === y || queen.x === king.x || queen.y === king.y) {
+    isStatus = true;
+  }
+  return isStatus;
 }
 
 /**
@@ -82,8 +98,18 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  let isStatus = false;
+  if (a > 0 && b > 0 && c > 0) {
+    if (a === b && c < a + b) {
+      isStatus = true;
+    } else if (a === c && b < a + c) {
+      isStatus = true;
+    } else if (b === c && a < b + c) {
+      isStatus = true;
+    }
+  }
+  return isStatus;
 }
 
 /**
@@ -100,8 +126,41 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let romanNumber = '';
+  const oneRoman = 'I';
+  const fiveRoman = 'V';
+  const tenRoman = 'X';
+  const second = num % 10;
+  if (num >= 10) {
+    const fistValue = Math.floor(num / 10);
+    switch (fistValue) {
+      case 1:
+        romanNumber += tenRoman;
+        break;
+      case 2:
+        romanNumber += tenRoman + tenRoman;
+        break;
+      case 3:
+        romanNumber += tenRoman + tenRoman + tenRoman;
+        break;
+      default:
+        break;
+    }
+  }
+  const startValue = romanNumber;
+  for (let index = 1; index <= second; index += 1) {
+    if (index === 4) {
+      romanNumber = startValue + oneRoman + fiveRoman;
+    } else if (index === 5) {
+      romanNumber = startValue + fiveRoman;
+    } else if (index === 9) {
+      romanNumber = startValue + oneRoman + tenRoman;
+    } else {
+      romanNumber += oneRoman;
+    }
+  }
+  return romanNumber;
 }
 
 /**
@@ -119,8 +178,55 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let strNumber = '';
+  for (let i = 0; i < numberStr.length; i += 1) {
+    if (numberStr[i] === '-') {
+      strNumber += 'minus ';
+      i += 1;
+    } else if (numberStr[i] === '.' || numberStr[i] === ',') {
+      strNumber += 'point ';
+      i += 1;
+    }
+    switch (Number(numberStr[i])) {
+      case 0:
+        strNumber += 'zero';
+        break;
+      case 1:
+        strNumber += 'one';
+        break;
+      case 2:
+        strNumber += 'two';
+        break;
+      case 3:
+        strNumber += 'three';
+        break;
+      case 4:
+        strNumber += 'four';
+        break;
+      case 5:
+        strNumber += 'five';
+        break;
+      case 6:
+        strNumber += 'six';
+        break;
+      case 7:
+        strNumber += 'seven';
+        break;
+      case 8:
+        strNumber += 'eight';
+        break;
+      case 9:
+        strNumber += 'nine';
+        break;
+      default:
+        break;
+    }
+    if (i < numberStr.length - 1) {
+      strNumber += ' ';
+    }
+  }
+  return strNumber;
 }
 
 /**
